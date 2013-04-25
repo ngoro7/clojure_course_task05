@@ -8,18 +8,21 @@
                  [compojure "1.1.5"]
                  [lib-noir "0.4.9"]
                  [enfocus "1.0.1"]
-                 ;[jayq "2.3.0"]
+                 [jayq "2.3.0"]
                  [mysql/mysql-connector-java "5.1.24"]
                  [korma "0.3.0-RC4"]]
 
   :plugins [[lein-ring "0.8.3"]
             [lein-cljsbuild "0.3.0"]]
 
-  :main pokupki.core
+  :ring {:handler pokupki.handler/app}
+
+  :aot []
+  :source-paths ["src/clj" "src/cljs"]
 
   :cljsbuild {
     :builds [{
-    :source-path "src"
+    :source-paths ["src/clj" "src/cljs"]
     :compiler {
       :pretty-print true,
       :output-to "resources/public/js/pokupki.js",
@@ -29,4 +32,4 @@
       :optimizations :whitespace,
       :print-input-delimiter false}}]}
 
-  :war {:name "hiredoer.war"})
+  :war {:name "pokupki.war"})
