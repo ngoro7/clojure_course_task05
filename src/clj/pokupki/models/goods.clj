@@ -29,10 +29,9 @@
 
 ;;
 (defn get-list-items [list-id]
-  {{:id 1 :name "Продукты"}
-   [{:id 1 :list 2 :name "Творог" :category 1 :qnt "1"}
-    {:id 2 :list 2 :name "Яблоки" :category 1 :qnt "3" :comment "Красные"}
-    {:id 3 :list 2 :name "Майонез" :category 1 :qnt "500"}
-    ]}
-  )
+  [{:category {:id 1 :name "Продукты"}
+   :goods [{:id 1 :list 2 :name "Творог" :category 1 :qnt "1"}
+           {:id 2 :list 2 :name "Яблоки" :category 1 :qnt "3" :comment "Красные"}
+           {:id 3 :list 2 :name "Майонез" :category 1 :qnt "500"}
+          ]}] )
 

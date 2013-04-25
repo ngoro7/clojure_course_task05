@@ -9,18 +9,18 @@
 ;; Snippets
 ;;
 
-(em/defsnippet sn-good-group "/html/snippets.html" [:.goodsgroup]
-  [{:keys [id name]}]
-  [:.goodsgroup] (em/set-attr :id (str "group" id))
-  [:h4] (em/content name))
-
-
 (em/defsnippet sn-good-item "/html/snippets.html" [:.gooditem]
   [{:keys [id itemno name comment]}]
   [:.gooditem] (em/set-attr :id (str "good" id))
   [:.goodno] (em/content (str itemno ". "))
   [:strong] (em/content name)
   [:small] (em/content (if (nil? comment) "" comment)))
+
+(em/defsnippet sn-good-group "/html/snippets.html" [:.goodsgroup]
+  [{{:keys [id name]} :category goods :goods}]
+  [:.goodsgroup] (em/set-attr :id (str "group" id))
+  [:h4] (em/content name)
+  [:.goods] (em/content (map sn-good-item goods)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Show snippets
@@ -30,12 +30,9 @@
   (em/at js/document
   	["#goodslist"] (em/content (:goodslist args))))
 
-(defn ^:export populate-list [data]
-  (let [gr (key (first data))]
-    (full-page {:goodslist (sn-good-group gr)})))
-
-
-
+(defn populate-list [data]
+  (let [one (first data)]
+    (full-page {:goodslist (sn-good-group one)} )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Entry point
