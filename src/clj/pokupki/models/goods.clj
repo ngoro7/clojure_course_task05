@@ -33,5 +33,9 @@
    :goods [{:id 1 :list 2 :name "Творог" :category 1 :qnt "1"}
            {:id 2 :list 2 :name "Яблоки" :category 1 :qnt "3" :comment "Красные"}
            {:id 3 :list 2 :name "Майонез" :category 1 :qnt "500"}
-          ]}] )
+          ]}
+   {:category {:id 2 :name "Хозяйственные товары"}
+    :goods [{:id 4 :list 2 :name "Шланг" :category 2 :qnt "1" :comment "для душа"}
+            {:id 5 :list 2 :name "Вантуз" :category 2 :qnt "2" :comment "да побольше!"}]}
+   ])
 

@@ -31,8 +31,7 @@
   	["#goodslist"] (em/content (:goodslist args))))
 
 (defn populate-list [data]
-  (let [one (first data)]
-    (full-page {:goodslist (sn-good-group one)} )))
+   (full-page {:goodslist (map sn-good-group data)}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Entry point
