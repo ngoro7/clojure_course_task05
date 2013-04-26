@@ -14,7 +14,8 @@
   [:.gooditem] (em/set-attr :id (str "good" id))
   [:.goodno] (em/content (str itemno ". "))
   [:strong] (em/content name)
-  [:small] (em/content (if (nil? comment) "" comment)))
+  [:small] (em/content (if (nil? comment) "" comment))
+  [:.btndel] (em/set-attr :onclick (str "pokupki.main.delete_good_item(" id ");")))
 
 (em/defsnippet sn-good-group "/html/snippets.html" [:.goodsgroup]
   [{{:keys [id name]} :category goods :goods}]
@@ -32,6 +33,14 @@
 
 (defn populate-list [data]
    (full-page {:goodslist (map sn-good-group data)}))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Actions
+;;
+(declare ^:export redraw-page)
+
+(defn ^:export delete-good-item [id]
+  (util/post-data (str "/good/delete/" id) redraw-page))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Entry point
