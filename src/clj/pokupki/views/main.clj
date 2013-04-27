@@ -7,7 +7,7 @@
 
 
 (defn get-goods-list [list-id]
-  (str (goods/get-list-items list-id)))
+  (str (goods/get-goods-list list-id)))
 
 (defn get-category-list []
   (str (goods/get-category-list)))

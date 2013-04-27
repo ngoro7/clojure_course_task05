@@ -4,9 +4,12 @@
 (def default-conn {:classname "com.mysql.jdbc.Driver"
                    :subprotocol "mysql"
                    :user "pok"
-                   :password "pokkey"
-                   :subname "//127.0.0.1:3306/hiredoer?useUnicode=true&characterEncoding=utf8"
+                   :password "goods"
+                   :subname "//127.0.0.1:3306/pokupki?useUnicode=true&characterEncoding=utf8"
                    :delimiters "`"})
+
+;;; test data
+(comment
 
 (def goodlists
   [{:id 2 :name "Текущий"}
@@ -35,7 +38,7 @@
   [{:id 5 :list 2 :name "Огурцы" :category 1 :qnt "4"}
    {:id 6 :list 2 :name "Колбаса" :category 1 :qnt "300" :comment "Вареная"}]))
 
-;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn get-list-items [list-id]
   ; TODO: multiple shop lists
   (vec @gooditems))
@@ -73,3 +76,29 @@
 (defn create-good [data]
   (let [newid (-get-next-good-id)]
     (println newid data)))
+) ; end of comment
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defdb korma-db default-conn)
+
+(defentity category)
+
+(defentity good
+  (has-one category))
+
+(defn get-category-list []
+  (select category (order :id)))
+
+(defn get-goods-list [listid]
+  (vec ; get rid of lazyness
+    (map (fn [[cid goods]] {:category (first (select category (where (= :id cid)))) :goods goods})
+      (group-by :f_category (select good (where (or (= :deleted nil) (= :deleted false))) (order :tm))))))
+
+(defn delete-good-item [id]
+  (update good
+    (set-fields {:tm (new java.util.Date) :deleted true})
+    (where (= :id id))))
+
+(defn create-good [data]
+ ;TODO
+  )
