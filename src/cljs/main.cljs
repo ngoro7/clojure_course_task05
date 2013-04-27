@@ -23,16 +23,29 @@
   [:h4] (em/content name)
   [:.goods] (em/content (map sn-good-item goods)))
 
+(defn category-options [category-list]
+  (let [res (clojure.string/join
+    (map (fn [{:keys [id name]}]
+      (str "<option value='" id  "'>" name "</option>")) category-list))]
+    ;(.log js/console res)
+    res))
+
+(em/defsnippet sn-category-list "/html/snippets.html" [:select]
+  [category-list]
+  [:select] (em/html-content (category-options category-list)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Show snippets
 ;;
 
-(defn full-page [args]
+(defn populate-category-list [data]
+  ;(.log js/console data)
   (em/at js/document
-  	["#goodslist"] (em/content (:goodslist args))))
+  	["#category"] (em/content (sn-category-list data))))
 
-(defn populate-list [data]
-   (full-page {:goodslist (map sn-good-group data)}))
+(defn populate-goods-list [data]
+  (em/at js/document
+  	["#goodslist"] (em/content (map sn-good-group data))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actions
@@ -47,6 +60,8 @@
 ;;
 
 (defn ^:export redraw-page []
-   (util/get-data "/goods-list" populate-list))
+  (util/get-data "/category-list" populate-category-list)
+  (util/get-data "/goods-list" populate-goods-list))
+
 
 (set! (.-onload js/window) redraw-page)

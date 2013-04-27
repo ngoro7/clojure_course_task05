@@ -15,3 +15,8 @@ div.gooditem button.btndel {
 div.gooditem:hover button.btndel {
 	display: block;
 }
+
+input {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

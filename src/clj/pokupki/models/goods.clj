@@ -61,3 +61,7 @@
     (println "gooditems: " @gooditems)
     (println "gooditems-deleted: " @gooditems-deleted)
     ))
+
+(defn get-category-list []
+  category
+  )
