@@ -17,7 +17,19 @@
   (goods/delete-good-item id)
   "done")
 
+(defmacro get-item [item & fields]
+  (let [mp# (apply hash-map (flatten (map #(vector (keyword %) %) fields)))]
+    `(let [{:keys [~@fields]} ~item]
+       ~mp#)))
+
+(defn create-good [item]
+  (-> item
+    (get-item name category amount comment)
+    goods/create-good)
+  "done")
+
 (defroutes app-routes
   (GET "/goods-list" [list-id] (get-goods-list list-id))
   (GET "/category-list" [] (get-category-list))
-  (POST "/good/delete/:id" [id] (delete-good-item id)))
+  (POST "/good/delete/:id" [id] (delete-good-item id))
+  (POST "/good/create" {params :params} (create-good params)))

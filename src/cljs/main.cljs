@@ -41,7 +41,7 @@
 (defn populate-category-list [data]
   ;(.log js/console data)
   (em/at js/document
-  	["#category"] (em/content (sn-category-list data))))
+  	["#category-group"] (em/content (sn-category-list data))))
 
 (defn populate-goods-list [data]
   (em/at js/document
@@ -54,6 +54,15 @@
 
 (defn ^:export delete-good-item [id]
   (util/post-data (str "/good/delete/" id) redraw-page))
+
+(defn ^:export add-good []
+  (let [name (util/get-element-value :#name)
+        amount (util/get-element-value :#amount)
+        category (util/get-element-value :#category)
+        comment (util/get-element-value :#comment)]
+    (if (> (count name) 0)
+      (do (util/post-data "/good/create" redraw-page {:name name :amount amount :category category :comment comment}) false)
+      (do (js/alert "Пожалуйста, заполните наименование!") false))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Entry point

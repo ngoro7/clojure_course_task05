@@ -38,20 +38,21 @@
             </h2>
           </div>
           <div class="formContainer">
-            <form id="goodForm" class="form-inline">
+            <form id="goodForm" class="form-inline"
+                  method="post" action="" novalidate onsubmit="return pokupki.main.add_good();">
               <fieldset>
                 <legend>Добавить товар:</legend>
-                <input type="text" class="span9" name="name" id="name" placeholder="Наименование">
-                <input type="text" class="span2" name="amount" id="amount" placeholder="Кол-во">
-                <button class="btn btn-small btn-primary" type="button">+</button>
-                <div id="category">
+                <input type="text" class="span9" name="name" id="name" placeholder="Наименование" maxlength="100">
+                <input type="text" class="span2" name="amount" id="amount" placeholder="Кол-во" maxlength="10">
+                <button class="btn btn-small btn-primary" type="submit">+</button>
+                <div id="category-group">
                   <select name="category">
                     <option value="1">Продукты питания</option>
                     <option value="2">Хозяйственные товары</option>
                     <option value="100">Другое</option>
                   </select>
                 </div>
-                <input type="text" class="span11" name="comment" id="comment" placeholder="Комментарий">
+                <input type="text" class="span11" name="comment" id="comment" placeholder="Комментарий" maxlength="100">
               </fieldset>
             </form>
           </div>

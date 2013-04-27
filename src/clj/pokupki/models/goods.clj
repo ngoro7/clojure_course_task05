@@ -65,3 +65,11 @@
 (defn get-category-list []
   category
   )
+
+(defn -get-next-good-id []
+  (let [m (reduce max (map :id (flatten (map :goods @gooditems))))]
+    (+ m 1)))
+
+(defn create-good [data]
+  (let [newid (-get-next-good-id)]
+    (println newid data)))
