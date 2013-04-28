@@ -40,7 +40,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn get-list-items [list-id]
-  ; TODO: multiple shop lists
   (vec @gooditems))
 
 (defn -remove-good-from-group [{:keys [category goods]} id]
@@ -91,14 +90,18 @@
 
 (defn get-goods-list [listid]
   (vec ; get rid of lazyness
+    (sort-by #(get-in % [:category :id])
     (map (fn [[cid goods]] {:category (first (select category (where (= :id cid)))) :goods goods})
-      (group-by :f_category (select good (where (or (= :deleted nil) (= :deleted false))) (order :tm))))))
+      (group-by :f_category (select good (where (or (= :deleted nil) (= :deleted false))) (order :tm)))))))
 
 (defn delete-good-item [id]
   (update good
     (set-fields {:tm (new java.util.Date) :deleted true})
     (where (= :id id))))
 
-(defn create-good [data]
- ;TODO
-  )
+(def pint (fn [n] (Integer/parseInt n)))
+
+(defn create-good [{:keys [name, category, amount, comment]}]
+  (insert good
+    (values {:name name :f_category (pint category)
+             :amount amount :comment comment})))
