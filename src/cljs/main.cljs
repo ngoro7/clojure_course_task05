@@ -43,9 +43,13 @@
   (em/at js/document
   	["#category-group"] (em/content (sn-category-list data))))
 
+(defn renumerate-goods []
+  (.text ($ ".goodno") (fn [idx _] (str (+ idx 1) ". "))))
+
 (defn populate-goods-list [data]
   (em/at js/document
-  	["#goodslist"] (em/content (map sn-good-group data))))
+  	["#goodslist"] (em/content (map sn-good-group data)))
+  (renumerate-goods))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Actions
@@ -70,7 +74,8 @@
 
 (defn ^:export redraw-page []
   (util/get-data "/category-list" populate-category-list)
-  (util/get-data "/goods-list" populate-goods-list))
+  (util/get-data "/goods-list" populate-goods-list)
+  (renumerate-goods))
 
 
 (set! (.-onload js/window) redraw-page)
