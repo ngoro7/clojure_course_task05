@@ -1,10 +1,30 @@
+.container {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #3b3b3b;
+    box-shadow: 10px 10px 5px #888888;
+    padding: 15px;
+    margin-top: 30px;
+}
+
 .centered {
 	margin: 0 auto;
 	width: 500px;
 }
 
+.formContainer {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #e3e3e3;
+    padding: 10px;
+}
+
 hr {
   margin: 10px 0;
+}
+
+div.comment small {
+    color: #808080;
 }
 
 div.gooditem button.btndel {
@@ -19,4 +39,14 @@ div.gooditem:hover button.btndel {
 input {
     margin-top: 3px;
     margin-bottom: 3px;
+}
+
+.group-title {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    background: -webkit-linear-gradient(top left, #b5e1fe, #e2eefe);
+    background: -moz-linear-gradient(top left, #b5e1fe, #e2eefe);
+    background: -o-linear-gradient(top left, #b5e1fe, #e2eefe);
+    background: linear-gradient(top left, #b5e1fe, #e2eefe);
 }
