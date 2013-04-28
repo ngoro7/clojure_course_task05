@@ -69,7 +69,7 @@
         (util/post-data "/good/create" redraw-page {:name name :amount amount :category category :comment comment})
         (.val ($ "#name") "")
         (.val ($ "#amount") "")
-        (.val ($ "#category") "")
+        (.val ($ "#comment") "")
         false)
       (do (js/alert "Пожалуйста, заполните наименование!") false))))
 
