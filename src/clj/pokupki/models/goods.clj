@@ -1,11 +1,18 @@
 (ns pokupki.models.goods
   (:use [korma db core]))
 
+(def env (into {} (System/getenv)))
+(def dbhost (get env "OPENSHIFT_MYSQL_DB_HOST"))
+(def dbport (get env "OPENSHIFT_MYSQL_DB_PORT"))
+
 (def default-conn {:classname "com.mysql.jdbc.Driver"
                    :subprotocol "mysql"
-                   :user "pok"
-                   :password "goods"
-                   :subname "//127.0.0.1:3306/pokupki?useUnicode=true&characterEncoding=utf8"
+                   ;:user "pok"
+                   ;:password "goods"
+                   ;:subname "//127.0.0.1:3306/pokupki?useUnicode=true&characterEncoding=utf8"
+                   :user "***"
+                   :password "***"
+                   :subname (str "//" dbhost ":" dbport "/pok?useUnicode=true&characterEncoding=utf8")
                    :delimiters "`"})
 
 ;;; test data

@@ -65,7 +65,12 @@
         category (util/get-element-value :#category)
         comment (util/get-element-value :#comment)]
     (if (> (count name) 0)
-      (do (util/post-data "/good/create" redraw-page {:name name :amount amount :category category :comment comment}) false)
+      (do
+        (util/post-data "/good/create" redraw-page {:name name :amount amount :category category :comment comment})
+        (.val ($ "#name") "")
+        (.val ($ "#amount") "")
+        (.val ($ "#category") "")
+        false)
       (do (js/alert "Пожалуйста, заполните наименование!") false))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

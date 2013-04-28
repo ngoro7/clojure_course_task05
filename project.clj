@@ -1,6 +1,6 @@
 (defproject pokupki "0.1.0-SNAPSHOT"
   :description "Shopping list"
-  :url "http://example.com/FIXME"
+  :url "http://pok-ngoro.rhcloud.com/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -28,8 +28,8 @@
       :output-to "resources/public/js/pokupki.js",
       :warnings true,
       :externs ["externs/jquery-1.9.js"],
-      ;; :optimizations :advanced,
-      :optimizations :whitespace,
+      :optimizations :advanced,
+      ;; :optimizations :whitespace,
       :print-input-delimiter false}}]}
 
   :war {:name "pokupki.war"})

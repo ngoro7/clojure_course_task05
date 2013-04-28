@@ -1,6 +1,6 @@
-create database pokupki charset=utf8;
+create database pok charset=utf8;
 
-use pokupki;
+use pok;
 
 SET NAMES 'utf8';
 
